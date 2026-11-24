@@ -1,3 +1,4 @@
+import CampoFormulario from '../components/CampoFormulario.jsx'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase, supabaseConfigurado } from '../lib/supabase.js'
@@ -76,71 +77,55 @@ export default function RegistroEmpresa() {
         <fieldset disabled={enviando}>
           <legend>Datos de la empresa</legend>
 
-          <div className="campo-formulario">
-            <label htmlFor="empresa-nombre">Nombre de la empresa</label>
-            <input
+          <CampoFormulario
+              etiqueta="Nombre de la empresa"
               id="empresa-nombre"
               name="nombre"
               type="text"
               autoComplete="organization"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="empresa-giro">Giro</label>
-            <input
+          <CampoFormulario
+              etiqueta="Giro"
               id="empresa-giro"
               name="giro"
               type="text"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="empresa-telefono">Teléfono</label>
-            <input
+          <CampoFormulario
+              etiqueta="Teléfono"
               id="empresa-telefono"
               name="telefono"
               type="tel"
               autoComplete="tel"
               required
             />
-          </div>
         </fieldset>
 
         <fieldset disabled={enviando}>
           <legend>Datos de acceso</legend>
 
-          <div className="campo-formulario">
-            <label htmlFor="empresa-correo">Correo electrónico</label>
-            <input
+          <CampoFormulario
+              etiqueta="Correo electrónico"
               id="empresa-correo"
               name="correo"
               type="email"
               autoComplete="email"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="empresa-password">Contraseña</label>
-            <input
+          <CampoFormulario
+              etiqueta="Contraseña"
               id="empresa-password"
               name="password"
               type="password"
               autoComplete="new-password"
               minLength="8"
-              aria-describedby="empresa-password-ayuda"
               required
+              ayuda="Usa al menos 8 caracteres."
             />
-            <p
-              id="empresa-password-ayuda"
-              className="campo-formulario__ayuda"
-            >
-              Usa al menos 8 caracteres.
-            </p>
-          </div>
         </fieldset>
 
         {error && <p role="alert">{error}</p>}

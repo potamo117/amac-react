@@ -1,3 +1,4 @@
+import CampoFormulario from '../components/CampoFormulario.jsx'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase, supabaseConfigurado } from '../lib/supabase.js'
@@ -57,27 +58,23 @@ export default function Login() {
         <fieldset disabled={enviando}>
           <legend>Datos de acceso</legend>
 
-          <div className="campo-formulario">
-            <label htmlFor="correo">Correo electrónico</label>
-            <input
+          <CampoFormulario
+              etiqueta="Correo electrónico"
               id="correo"
               name="correo"
               type="email"
               autoComplete="username"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="password">Contraseña</label>
-            <input
+          <CampoFormulario
+              etiqueta="Contraseña"
               id="password"
               name="password"
               type="password"
               autoComplete="current-password"
               required
             />
-          </div>
         </fieldset>
 
         {error && <p role="alert">{error}</p>}

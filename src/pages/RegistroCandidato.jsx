@@ -1,3 +1,4 @@
+import CampoFormulario from '../components/CampoFormulario.jsx'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase, supabaseConfigurado } from '../lib/supabase.js'
@@ -77,31 +78,26 @@ export default function RegistroCandidato() {
         <fieldset disabled={enviando}>
           <legend>Datos personales</legend>
 
-          <div className="campo-formulario">
-            <label htmlFor="nombre">Nombre completo</label>
-            <input
+          <CampoFormulario
+              etiqueta="Nombre completo"
               id="nombre"
               name="nombre"
               type="text"
               autoComplete="name"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="telefono">Teléfono</label>
-            <input
+          <CampoFormulario
+              etiqueta="Teléfono"
               id="telefono"
               name="telefono"
               type="tel"
               autoComplete="tel"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="edad">Edad</label>
-            <input
+          <CampoFormulario
+              etiqueta="Edad"
               id="edad"
               name="edad"
               type="number"
@@ -110,58 +106,47 @@ export default function RegistroCandidato() {
               step="1"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="colonia">Colonia</label>
-            <input
+          <CampoFormulario
+              etiqueta="Colonia"
               id="colonia"
               name="colonia"
               type="text"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="experiencia">Experiencia laboral</label>
-            <textarea
+          <CampoFormulario
+              etiqueta="Experiencia laboral"
               id="experiencia"
               name="experiencia"
               rows="4"
               required
+              multilinea
             />
-          </div>
         </fieldset>
 
         <fieldset disabled={enviando}>
           <legend>Datos de acceso</legend>
 
-          <div className="campo-formulario">
-            <label htmlFor="correo">Correo electrónico</label>
-            <input
+          <CampoFormulario
+              etiqueta="Correo electrónico"
               id="correo"
               name="correo"
               type="email"
               autoComplete="email"
               required
             />
-          </div>
 
-          <div className="campo-formulario">
-            <label htmlFor="password">Contraseña</label>
-            <input
+          <CampoFormulario
+              etiqueta="Contraseña"
               id="password"
               name="password"
               type="password"
               autoComplete="new-password"
               minLength="8"
-              aria-describedby="ayuda-password"
               required
+              ayuda="Usa al menos 8 caracteres."
             />
-            <p id="ayuda-password" className="campo-formulario__ayuda">
-              Usa al menos 8 caracteres.
-            </p>
-          </div>
 
           <div className="campo-formulario">
             <label htmlFor="terminos">
