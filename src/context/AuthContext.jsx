@@ -5,45 +5,81 @@ const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [sesion, setSesion] = useState(null)
-  const [perfil, setPerfil] = useState(null)
-  const [cargando, setCargando] = useState(supabaseConfigurado)
+  const [sesionLista, setSesionLista] = useState(!supabaseConfigurado)
+  const [resultadoPerfil, setResultadoPerfil] = useState(null)
 
   useEffect(() => {
     if (!supabaseConfigurado) return undefined
 
-    supabase.auth.getSession().then(({ data }) => {
-      setSesion(data.session)
-      if (!data.session) setCargando(false)
-    })
+    let activo = true
+    let eventoRecibido = false
 
-    const { data: suscripcion } = supabase.auth.onAuthStateChange((_evento, nuevaSesion) => {
-      setSesion(nuevaSesion)
-      if (!nuevaSesion) {
-        setPerfil(null)
-        setCargando(false)
+    const { data: suscripcion } = supabase.auth.onAuthStateChange(
+      (_evento, nuevaSesion) => {
+        if (!activo) return
+
+        eventoRecibido = true
+        setSesion(nuevaSesion)
+        setSesionLista(true)
+
+        if (!nuevaSesion) {
+          setResultadoPerfil(null)
+        }
       }
-    })
+    )
 
-    return () => suscripcion.subscription.unsubscribe()
+    supabase.auth.getSession()
+      .then(({ data, error }) => {
+        if (!activo || eventoRecibido) return
+
+        setSesion(error ? null : data.session)
+        setSesionLista(true)
+      })
+      .catch(() => {
+        if (!activo || eventoRecibido) return
+
+        setSesion(null)
+        setSesionLista(true)
+      })
+
+    return () => {
+      activo = false
+      suscripcion.subscription.unsubscribe()
+    }
   }, [])
 
-  const usuarioId = sesion?.user?.id
+  const usuarioId = sesion?.user?.id ?? null
 
   useEffect(() => {
     if (!usuarioId) return undefined
+
     let cancelado = false
 
-    supabase
-      .from('perfiles')
-      .select('*')
-      .eq('id', usuarioId)
-      .single()
-      .then(({ data, error }) => {
+    async function cargarPerfil() {
+      try {
+        const { data, error } = await supabase
+          .from('perfiles')
+          .select('*')
+          .eq('id', usuarioId)
+          .single()
+
         if (cancelado) return
-        if (error) console.error('No se pudo cargar el perfil', error.message)
-        setPerfil(data ?? null)
-        setCargando(false)
-      })
+
+        setResultadoPerfil({
+          usuarioId,
+          perfil: error ? null : data
+        })
+      } catch {
+        if (cancelado) return
+
+        setResultadoPerfil({
+          usuarioId,
+          perfil: null
+        })
+      }
+    }
+
+    cargarPerfil()
 
     return () => {
       cancelado = true
@@ -51,15 +87,48 @@ export function AuthProvider({ children }) {
   }, [usuarioId])
 
   async function cerrarSesion() {
-    await supabase.auth.signOut()
+    const { error } = await supabase.auth.signOut()
+
+    if (error) throw error
+
+    setSesion(null)
+    setResultadoPerfil(null)
+    setSesionLista(true)
   }
 
-  const valor = { sesion, perfil, rol: perfil?.rol ?? null, cargando, cerrarSesion }
-  return <AuthContext.Provider value={valor}>{children}</AuthContext.Provider>
+  const perfilResuelto =
+    Boolean(usuarioId) && resultadoPerfil?.usuarioId === usuarioId
+
+  const perfilActual = perfilResuelto
+    ? resultadoPerfil.perfil
+    : null
+
+  const cargando =
+    !sesionLista || (Boolean(usuarioId) && !perfilResuelto)
+
+  const valor = {
+    sesion,
+    perfil: perfilActual,
+    rol: perfilActual?.rol ?? null,
+    cargando,
+    cerrarSesion
+  }
+
+  return (
+    <AuthContext.Provider value={valor}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
+// Conservamos el hook aquí para mantener los imports actuales.
+// oxlint-disable-next-line react/only-export-components
 export function useAuth() {
   const contexto = useContext(AuthContext)
-  if (!contexto) throw new Error('useAuth debe usarse dentro de AuthProvider')
+
+  if (!contexto) {
+    throw new Error('useAuth debe usarse dentro de AuthProvider')
+  }
+
   return contexto
 }
