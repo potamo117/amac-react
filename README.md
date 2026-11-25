@@ -2,7 +2,7 @@
 
 Proyecto final **OT2026-WEB**. AMAC es una plataforma de empleo para **personas adultas mayores** en Monterrey y su área metropolitana. En esta entrega, el sitio HTML/CSS de la Entrega 2 se convirtió en una **aplicación web real**: el frontend está hecho en React (Vite), los datos viven en PostgreSQL dentro de Supabase (con inicio de sesión y seguridad por fila) y la aplicación se publica en Vercel.
 
-- **Repositorio:** _pendiente: pegar la URL de GitHub de `amac-react`_
+- **Repositorio:** https://github.com/potamo117/amac-react
 - **Aplicación publicada (Vercel):** _pendiente: pegar la URL_
 - **Video de la presentación:** _pendiente: pegar el enlace_
 - **Diapositivas:** _pendiente: pegar el enlace o subir el PDF a `docs/`_
@@ -75,7 +75,7 @@ El SQL completo está en [`supabase/esquema.sql`](supabase/esquema.sql).
 
 ![Diagrama de la base de datos (Schema Visualizer de Supabase)](docs/diagrama-bd.png)
 
-_Pendiente: guardar la captura del Schema Visualizer como `docs/diagrama-bd.png`._
+Para la demo, [`supabase/datos-ejemplo.sql`](supabase/datos-ejemplo.sql) carga 8 vacantes de ejemplo a nombre de la primera empresa registrada.
 
 | Tabla | Qué guarda | Restricciones principales |
 |---|---|---|
@@ -106,35 +106,35 @@ La ruta protegida de React solo **esconde pantallas**. La seguridad real está e
 
 ## Requerimientos funcionales implementados
 
-Estado: ✅ completo · 🟡 parcial · ❌ pendiente. _(Actualizar antes de entregar.)_
+Estado: ✅ completo · 🟡 parcial · ❌ pendiente. _Las filas en 🟡 tienen el código hecho y falta probarlas con la base de datos real; cámbielas a ✅ cuando pasen las pruebas de la sección 5.12._
 
 ### Flujo del candidato
 
 | # | Funcionalidad | RF | Estado | Responsable |
 |---|---|---|---|---|
-| 1 | Listado de vacantes desde la base de datos (solo `activa`) | RF-001 | ❌ | Persona 1 |
-| 2 | Búsqueda por palabra clave y filtros por horario y categoría | RF-002, RF-007 | ❌ | Persona 1 |
-| 3 | Detalle de vacante y botón «Llamar» solo si hay teléfono | RF-003, RF-051 | ❌ | Persona 1 |
-| 4 | Registro de candidato con casilla de términos | RF-011, RF-012, RF-013 | ❌ | Persona 2 |
-| 5 | Inicio y cierre de sesión con error genérico | RF-008, RF-009 | ❌ | Persona 2 |
-| 6 | Postularme (solo aprobados, una sola vez, con confirmación) | RF-004, RF-054 | ❌ | Persona 2 |
-| 7 | Mis solicitudes y cancelar con confirmación | RF-005, RF-006 | ❌ | Persona 1 |
+| 1 | Listado de vacantes desde la base de datos (solo `activa`) | RF-001 | ✅ | Persona 1 |
+| 2 | Búsqueda por palabra clave y filtros por horario y categoría | RF-002, RF-007 | ✅ | Persona 1 |
+| 3 | Detalle de vacante y botón «Llamar» solo si hay teléfono | RF-003, RF-051 | ✅ | Persona 1 |
+| 4 | Registro de candidato con casilla de términos | RF-011, RF-012, RF-013 | 🟡 | Persona 2 |
+| 5 | Inicio y cierre de sesión con error genérico | RF-008, RF-009 | 🟡 | Persona 2 |
+| 6 | Postularme (solo aprobados, una sola vez, con confirmación) | RF-004, RF-054 | 🟡 | Persona 2 |
+| 7 | Mis solicitudes y cancelar con confirmación | RF-005, RF-006 | ✅ | Persona 1 |
 
 ### Flujo de la empresa
 
 | # | Funcionalidad | RF | Estado | Responsable |
 |---|---|---|---|---|
-| 8 | Registro de empresa | RF-015 | ❌ | Persona 3 |
-| 9 | Publicar vacante con campos validados | RF-019 | ❌ | Persona 3 |
-| 10 | Mis vacantes: número de solicitudes, pausar, reactivar y cerrar | RF-020, RF-021 | ❌ | Persona 3 |
-| 11 | Solicitudes recibidas y cambio de estatus | RF-022, RF-024 | ❌ | Persona 3 |
+| 8 | Registro de empresa | RF-015 | 🟡 | Persona 3 |
+| 9 | Publicar vacante con campos validados | RF-019 | 🟡 | Persona 3 |
+| 10 | Mis vacantes: número de solicitudes, pausar, reactivar y cerrar | RF-020, RF-021 | 🟡 | Persona 3 |
+| 11 | Solicitudes recibidas y cambio de estatus | RF-022, RF-024 | 🟡 | Persona 3 |
 
 ### General y extras
 
 | Funcionalidad | RF | Estado | Responsable |
 |---|---|---|---|
-| Rutas protegidas por rol | RF-010 | ❌ | Persona 1 |
-| Accesibilidad y responsivo de la Entrega 2 conservados | — | ❌ | Todos |
+| Rutas protegidas por rol | RF-010 | ✅ | Persona 1 |
+| Accesibilidad y responsivo de la Entrega 2 conservados | — | 🟡 | Todos |
 | _Extra:_ vacantes favoritas | RF-041 | ❌ | Persona 1 |
 | _Extra:_ recuperar contraseña y editar perfil de candidato | RF-029, RF-014 | ❌ | Persona 2 |
 | _Extra:_ editar perfil de empresa y fecha de cambio de estatus | RF-017, RF-024 | ❌ | Persona 3 |

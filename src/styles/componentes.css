@@ -298,3 +298,44 @@
   background: #fff;
   font: inherit;
 }
+
+/* ---------- Persona 1: sueldo en tarjeta, solicitudes y estatus extra ---------- */
+.tarjeta-vacante__sueldo { margin: 0; font-weight: 700; }
+
+.etiqueta-estatus--enviada {
+  background-color: var(--color-fondo-busqueda);
+  color: var(--color-primario);
+}
+
+.etiqueta-estatus--cancelada {
+  background-color: #e5e5e5;
+  color: #3d3b3b;
+}
+
+.lista-solicitudes {
+  display: grid;
+  gap: var(--espacio-m);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lista-solicitudes__item {
+  display: grid;
+  gap: var(--espacio-s);
+  justify-items: start;
+  padding: 1.5rem;
+  border: 2px solid var(--color-borde-tarjeta);
+  border-radius: var(--radio);
+  background: var(--color-fondo-tarjeta);
+}
+.lista-solicitudes__item p { margin: 0; }
+.lista-solicitudes__titulo { margin: 0; font-size: var(--texto-h2); }
+.lista-solicitudes__titulo a { color: var(--color-primario); }
+.lista-solicitudes__empresa { font-weight: 700; }
+.lista-solicitudes__fecha { color: var(--color-texto-suave); }
+
+.boton:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.mensaje { margin: var(--espacio-m) 0 0; padding: 0.75rem 1rem; border-radius: var(--radio); font-weight: 600; }
+.mensaje--exito { background: #dcfce7; color: #14532d; }
+.mensaje--error { background: #fee2e2; color: #7f1d1d; }
