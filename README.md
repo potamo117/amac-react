@@ -3,7 +3,7 @@
 Proyecto final **OT2026-WEB**. AMAC es una plataforma de empleo para **personas adultas mayores** en Monterrey y su área metropolitana. En esta entrega, el sitio HTML/CSS de la Entrega 2 se convirtió en una **aplicación web real**: el frontend está hecho en React (Vite), los datos viven en PostgreSQL dentro de Supabase (con inicio de sesión y seguridad por fila) y la aplicación se publica en Vercel.
 
 - **Repositorio:** https://github.com/potamo117/amac-react
-- **Aplicación publicada (Vercel):** _pendiente: pegar la URL_
+- **Aplicación publicada (Vercel):** https://amac-react-nine.vercel.app
 - **Video de la presentación:** _pendiente: pegar el enlace_
 - **Diapositivas:** _pendiente: pegar el enlace o subir el PDF a `docs/`_
 - **Entrega 2 (HTML y CSS):** https://amac-web-gamma.vercel.app
